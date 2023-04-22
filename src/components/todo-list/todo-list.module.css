@@ -1,0 +1,10 @@
+.container {
+    width: 400px;
+    height: auto;
+    margin: 0 auto;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+}
