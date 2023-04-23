@@ -22,11 +22,20 @@ function App() {
 	}
 
 	let tasksForTodoList = tasks;
+	// сделать функц.
 	if (filter === "completed") {
 		tasksForTodoList = tasks.filter((t) => t.isDone === true);
 	} else if (filter === "active") {
 		tasksForTodoList = tasks.filter((t) => t.isDone === false);
 	}
+
+	// let tasksForTodoList = tasks;
+	// // сделать функц.
+	// if (filter === "completed") {
+	// 	tasksForTodoList = tasks.filter((t) => t.isDone === true);
+	// } else if (filter === "active") {
+	// 	tasksForTodoList = tasks.filter((t) => t.isDone === false);
+	// }
 
 	const handelInput = (text: string) => {
 		setValue(text);
@@ -63,17 +72,19 @@ function App() {
 
 	return (
 		<div className={styled.App}>
-			<TodoList
-				tasks={tasksForTodoList}
-				title="My Todo List"
-				handelInput={handelInput}
-				value={value}
-				addTask={addTask}
-				changeFilter={changeFilter}
-				removeTask={removeTask}
-				changeTaskStatus={changeStatus}
-				filter={filter}
-			/>
+			<div className={styled.appContainer}>
+				<TodoList
+					tasks={tasksForTodoList}
+					title="My Todo List"
+					handelInput={handelInput}
+					value={value}
+					addTask={addTask}
+					changeFilter={changeFilter}
+					removeTask={removeTask}
+					changeTaskStatus={changeStatus}
+					filter={filter}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import { propsType } from "../../global-type";
 import styled from "./todo-list.module.css";
 import TodoInput from "../TodoInput/TodoInput";
 import ListOfTodos from "../list-of-todos/ListOfTodos";
-import Button from "../buttons/Button";
+import FilterButtons from "../filter-buttons/FilterButtons";
 
 const TodoList: React.FC<propsType> = ({
 	tasks,
@@ -16,7 +16,7 @@ const TodoList: React.FC<propsType> = ({
 	removeTask,
 	changeTaskStatus,
 }) => {
-	const [error, setError] = useState<string | null>(null);
+	const [error, setError] = useState<boolean | null>(null);
 
 	const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
 		handelInput(e.target.value);
@@ -25,7 +25,7 @@ const TodoList: React.FC<propsType> = ({
 		if (value) {
 			addTask();
 		} else {
-			setError("Field is require");
+			setError(true);
 		}
 	};
 	const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -47,7 +47,7 @@ const TodoList: React.FC<propsType> = ({
 	return (
 		<div className={styled.wrapper}>
 			<div className={styled.container}>
-				<h1>{title}</h1>
+				<h1 className={styled.title}>{title}</h1>
 				<TodoInput
 					value={value}
 					inputHandler={inputHandler}
@@ -60,8 +60,9 @@ const TodoList: React.FC<propsType> = ({
 					changeTaskStatus={changeTaskStatus}
 					removeTask={removeTask}
 				/>
-				<Button
+				<FilterButtons
 					filter={filter}
+					// сделать одной функц.
 					onAllFilterHandler={onAllFilterHandler}
 					onActiveFilterHandler={onActiveFilterHandler}
 					onCompletedFilterHandler={onCompletedFilterHandler}

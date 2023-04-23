@@ -5,7 +5,7 @@ type TodoInputPropsType = {
 	value: string;
 	inputHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 	onKeyPressHandler: (e: KeyboardEvent<HTMLInputElement>) => void;
-	error: string | null;
+	error: boolean | null;
 	addTaskHandler: () => void;
 };
 
@@ -21,12 +21,20 @@ const TodoInput: React.FC<TodoInputPropsType> = ({
 			<div className={styled.inputAndButton}>
 				<input
 					type="text"
+					placeholder={error ? "Field is required" : "New Task"}
 					value={value}
 					onChange={inputHandler}
 					onKeyDown={onKeyPressHandler}
-					className={`${error ? styled.error : styled.nothing}`}
+					className={`${error ? styled.error : styled.input}`}
 				/>
-				<button onClick={addTaskHandler}>add</button>
+				<button
+					onClick={addTaskHandler}
+					className={`${
+						error ? styled.inputButtonError : styled.inputButton
+					}`}
+				>
+					Add Task
+				</button>
 				{error && <div className={styled.errorMassage}>{error}</div>}
 			</div>
 		</div>

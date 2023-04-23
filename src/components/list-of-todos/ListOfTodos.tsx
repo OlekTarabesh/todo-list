@@ -1,4 +1,5 @@
 import { TaskType } from "../../global-type";
+import Button from "../button/Button";
 import styled from "./list-of-todos.module.css";
 
 import React, { ChangeEvent } from "react";
@@ -15,8 +16,8 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 	removeTask,
 }) => {
 	return (
-		<div>
-			<ul>
+		<div className={styled.wrapper}>
+			<ul className={styled.ulContainer}>
 				{tasks.map((task) => {
 					const onChangeHandler = (
 						e: ChangeEvent<HTMLInputElement>
@@ -27,18 +28,28 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 						<li
 							key={task.id}
 							className={`${
-								task.isDone ? styled.isDone : styled.nothing
+								task.isDone
+									? styled.taskTextAndContainerIsDone
+									: styled.taskTextAndContainer
 							}`}
 						>
-							<input
-								type="checkbox"
-								onChange={onChangeHandler}
-								checked={task.isDone}
-							/>
 							{task.title}
-							<button onClick={() => removeTask(task.id)}>
-								x
-							</button>
+							<div className={styled.iconsContainer}>
+								<div className={styled.checkIsDoneContainer}>
+									<input
+										id="check"
+										type="checkbox"
+										onChange={onChangeHandler}
+										checked={task.isDone}
+										className={styled.checkIsDone}
+									/>
+									<label htmlFor="check" />
+								</div>
+								<Button
+									onClick={() => removeTask(task.id)}
+									className={styled.deleteButton}
+								/>
+							</div>
 						</li>
 					);
 				})}
