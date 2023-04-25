@@ -21,7 +21,7 @@ const TodoInput: React.FC<TodoInputPropsType> = ({
 			<div className={styled.inputAndButton}>
 				<input
 					type="text"
-					placeholder={error ? "Field is required" : "New Task"}
+					placeholder={error ? "Field is required" : "New Task..."}
 					value={value}
 					onChange={inputHandler}
 					onKeyDown={onKeyPressHandler}

@@ -1,5 +1,8 @@
 import { TaskType } from "../../global-type";
-import Button from "../button/Button";
+// import Button from "../button/Button";
+import Checkbox from "../checkbox/Checkbox";
+import EditTask from "../edit-task/EditTask";
+import Trash from "../trash-basket/Trash";
 import styled from "./list-of-todos.module.css";
 
 import React, { ChangeEvent } from "react";
@@ -37,18 +40,24 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 							<div className={styled.iconsContainer}>
 								<div className={styled.checkIsDoneContainer}>
 									<input
-										id="check"
+										id={task.id}
 										type="checkbox"
 										onChange={onChangeHandler}
 										checked={task.isDone}
 										className={styled.checkIsDone}
 									/>
-									<label htmlFor="check" />
+									<label
+										className={styled.checkboxLabel}
+										htmlFor={task.id}
+									>
+										<Checkbox
+											id={task.id}
+											className={styled.isDoneSVG}
+										/>
+									</label>
 								</div>
-								<Button
-									onClick={() => removeTask(task.id)}
-									className={styled.deleteButton}
-								/>
+								<EditTask onClick={() => {}} />
+								<Trash onClick={() => removeTask(task.id)} />
 							</div>
 						</li>
 					);

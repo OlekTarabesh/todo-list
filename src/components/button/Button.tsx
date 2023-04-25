@@ -1,20 +1,25 @@
-import { TaskType } from "../../global-type";
-import styled from "./button.module.css";
-
 import React from "react";
 
+// import styled from "./button.module.css";
+
 type ButtonPropsType = {
-	onClick: () => void;
+	onChange?: () => void;
+	onClick?: () => void;
 	children?: string;
-	className: any;
+	className: string;
 };
 
 const Button: React.FC<ButtonPropsType> = ({
 	onClick,
-	// children,
+	onChange,
+	children,
 	className,
 }) => {
-	return <button className={className} onClick={onClick}></button>;
+	return (
+		<button onChange={onChange} className={className} onClick={onClick}>
+			{children}
+		</button>
+	);
 };
 
 export default Button;

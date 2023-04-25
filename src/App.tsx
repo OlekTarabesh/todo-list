@@ -8,10 +8,10 @@ export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
 	const [tasks, setTasks] = useState<Array<TaskType>>([
-		{ id: v1(), title: "HTML", isDone: true },
-		{ id: v1(), title: "CSS", isDone: true },
+		{ id: v1(), title: "HTML", isDone: false },
+		{ id: v1(), title: "CSS", isDone: false },
 		{ id: v1(), title: "JS", isDone: false },
-		{ id: v1(), title: "Redux", isDone: false },
+		{ id: v1(), title: "Redux", isDone: true },
 	]);
 
 	const [filter, setFilter] = useState("all");
