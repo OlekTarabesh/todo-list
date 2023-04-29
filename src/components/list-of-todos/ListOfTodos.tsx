@@ -1,6 +1,6 @@
 import { FilterValuesType, TaskType } from "../../global-type";
 import Checkbox from "../buttons-components/checkbox/Checkbox";
-import EditTaskInput from "../edit-task-form/EditTaskForm";
+import EditTaskInput from "../edit-task-form/EditTaskInput";
 import EditTask from "../buttons-components/edit-task/EditTask";
 import FilterButtons from "../buttons-components/filter-buttons/FilterButtons";
 import Trash from "../buttons-components/trash-basket/Trash";
@@ -16,8 +16,7 @@ type ListOfTodosPropsType = {
 	changeTaskStatus: (taskId: string, isDone: boolean) => void;
 	removeTask: (id: string) => void;
 	editTodo: (id: string,  title: string) => void;
-	addTask: () => void;
-	editTitleOfTask: (title: string, id: string) => void;
+	cancelEditing: (id: string) => void;
 };
 
 const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
@@ -28,8 +27,7 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 	changeTaskStatus,
 	removeTask,
 	editTodo,
-	addTask,
-	editTitleOfTask
+	cancelEditing
 }) => {
 
 	let tasksForTodoList = tasks;
@@ -55,15 +53,11 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 						return task.isEditing ? (
 							<EditTaskInput
 								tasks={tasks}
-								editTodo={editTitleOfTask}
+								editTodo={editTodo}
 								key={task.id}
 								id={task.id}
 								value={task.title}
-								placeholder={task.title}
-								onClick={() => {}}
-								onKeyDown={() => {}}
-								addTask={addTask}
-								editTitleOfTask={editTitleOfTask}
+								cancelEditing={cancelEditing}
 							/>
 						) : (
 							<li

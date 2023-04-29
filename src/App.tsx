@@ -58,7 +58,7 @@ function App() {
 	};
 
 
-	const editTodo = (id: string, title: string) => {
+	const editTodo = (id: string) => {
 		const editingTask = tasks.map((t) =>
 			t.id === id
 				? {
@@ -70,10 +70,16 @@ function App() {
 		setTasks([...editingTask]);
 	};
 
-	const editTitleOfTask = (title: string, id: string) => {
-		setTasks(tasks.map(t => t.id === id ? {
-			...t, title, isEditing: !t.isEditing 
-		} : t))
+	const cancelEditing = (id: string) => {
+		const canceling = tasks.map((t) =>
+			t.id === id
+				? {
+						...t,
+						isEditing: !t.isEditing,
+				}
+			: t
+	);
+	setTasks([...canceling]);
 	}
 
 	const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -122,8 +128,7 @@ function App() {
 					removeTask={removeTask}
 					changeFilter={changeFilter}
 					editTodo={editTodo}
-					addTask={addTask}
-					editTitleOfTask={editTitleOfTask}
+					cancelEditing={cancelEditing}
 				/>
 			</div>
 		</div>
