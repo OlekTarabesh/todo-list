@@ -4,6 +4,10 @@
     height: 20px;
     border: none;
     background-color: transparent;
-    background-image: url('../../assets/trash\ 1.svg');
+    background-image: url('../../../assets/trash\ 1.svg');
     cursor: pointer;
+}
+
+.deleteButton:hover {
+    opacity: 0.6;
 }

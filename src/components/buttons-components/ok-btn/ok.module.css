@@ -1,0 +1,24 @@
+.ok {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.ok:hover {
+    opacity: 0.6;
+}
+
+.okBtn {
+    display: block;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    width: 20px;
+    height: 20px;
+    /* background-image: url('../../assets/ok.svg') center center/cover no-repeat; */
+    background-image: url('../../../assets/ok.svg');
+    cursor: pointer;
+}

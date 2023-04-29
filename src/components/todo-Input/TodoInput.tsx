@@ -1,5 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent } from "react";
 import styled from "./todo-input.module.css";
+import Button from "../buttons-components/button/Button";
 
 type TodoInputPropsType = {
 	value: string;
@@ -27,14 +28,14 @@ const TodoInput: React.FC<TodoInputPropsType> = ({
 					onKeyDown={onKeyPressHandler}
 					className={`${error ? styled.error : styled.input}`}
 				/>
-				<button
+				<Button
 					onClick={addTaskHandler}
 					className={`${
 						error ? styled.inputButtonError : styled.inputButton
 					}`}
 				>
 					Add Task
-				</button>
+				</Button>
 				{error && <div className={styled.errorMassage}>{error}</div>}
 			</div>
 		</div>

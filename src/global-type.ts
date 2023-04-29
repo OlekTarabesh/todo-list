@@ -4,6 +4,7 @@ export type TaskType = {
 	id: string;
 	title: string;
 	isDone: boolean;
+	isEditing: boolean;
 };
 
 export type propsType = {
@@ -16,4 +17,6 @@ export type propsType = {
 	changeFilter: (value: FilterValuesType) => void;
 	removeTask: (id: string) => void;
 	changeTaskStatus: (taskId: string, isDone: boolean) => void;
+	// editTodo: (editTask: () => void) => void;
+	// editTask: () => void;
 };

@@ -1,9 +1,9 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import { propsType } from "../../global-type";
 import styled from "./todo-list.module.css";
-import TodoInput from "../TodoInput/TodoInput";
+import TodoInput from "../todo-Input/TodoInput";
 import ListOfTodos from "../list-of-todos/ListOfTodos";
-import FilterButtons from "../filter-buttons/FilterButtons";
+import FilterButtons from "../buttons-components/filter-buttons/FilterButtons";
 
 const TodoList: React.FC<propsType> = ({
 	tasks,
@@ -15,59 +15,22 @@ const TodoList: React.FC<propsType> = ({
 	changeFilter,
 	removeTask,
 	changeTaskStatus,
+	// editTodo,
+	// editTask,
 }) => {
 	const [error, setError] = useState<boolean | null>(null);
 
-	const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-		handelInput(e.target.value);
-	};
-	const addTaskHandler = () => {
-		if (value) {
-			addTask();
-		} else {
-			setError(true);
-		}
-	};
-	const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-		setError(null);
-		if (e.key === "Enter" && value) {
-			addTask();
-		}
-	};
-
-	const onAllFilterHandler = () => {
-		changeFilter("all");
-	};
-	const onActiveFilterHandler = () => {
-		changeFilter("active");
-	};
-	const onCompletedFilterHandler = () => {
-		changeFilter("completed");
-	};
 	return (
 		<div className={styled.wrapper}>
-			<div className={styled.container}>
-				<h1 className={styled.title}>{title}</h1>
-				<TodoInput
-					value={value}
-					inputHandler={inputHandler}
-					onKeyPressHandler={onKeyPressHandler}
-					error={error}
-					addTaskHandler={addTaskHandler}
-				/>
+			{/* <div className={styled.container}>
 				<ListOfTodos
+					// value={value}
 					tasks={tasks}
 					changeTaskStatus={changeTaskStatus}
 					removeTask={removeTask}
+					// editTodo={editTask}
 				/>
-				<FilterButtons
-					filter={filter}
-					// сделать одной функц.
-					onAllFilterHandler={onAllFilterHandler}
-					onActiveFilterHandler={onActiveFilterHandler}
-					onCompletedFilterHandler={onCompletedFilterHandler}
-				/>
-			</div>
+			</div> */}
 		</div>
 	);
 };

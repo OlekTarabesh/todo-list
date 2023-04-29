@@ -1,11 +1,14 @@
 import React from "react";
+import { FilterValuesType } from "../../../global-type";
 
 // import styled from "./button.module.css";
 
 type ButtonPropsType = {
 	onChange?: () => void;
 	onClick?: () => void;
-	children?: string;
+	editTodo?: (id: string, taska: string) => void;
+	changeFilter?: (value: FilterValuesType) => void;
+	children?: any;
 	className: string;
 };
 

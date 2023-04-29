@@ -12,7 +12,6 @@
     width: 100%;
     /* height: auto; */
     padding: 0;
-
     display: block;
     display: flex;
     flex-wrap: wrap;
@@ -78,12 +77,4 @@
 
 input[type=checkbox] {
     display: none;
-}
-
-.isDoneSVG {
-    opacity: 0.5;
-}
-
-.isDoneSVG:hover {
-    opacity: 1;
 }
