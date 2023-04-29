@@ -17,6 +17,5 @@ export type propsType = {
 	changeFilter: (value: FilterValuesType) => void;
 	removeTask: (id: string) => void;
 	changeTaskStatus: (taskId: string, isDone: boolean) => void;
-	// editTodo: (editTask: () => void) => void;
-	// editTask: () => void;
+	editTask: () => void;
 };

@@ -12,8 +12,8 @@ type EditTaskInputPropsType = {
 	// placeholder?: string;
 	// onClick: () => void;
 	// onKeyDown: () => void;
-	editTodo: (id: string,  title: string) => void;
-	cancelEditing: (id: string) => void;
+	editTodo: (id: string) => void;
+	// cancelEditing: (id: string) => void;
 };
 const EditTaskInput: React.FC<EditTaskInputPropsType> = ({
 	tasks,
@@ -22,7 +22,7 @@ const EditTaskInput: React.FC<EditTaskInputPropsType> = ({
 	// onClick,
 	// onKeyDown,
 	editTodo,
-	cancelEditing
+	// cancelEditing
 }) => {
 	const [error, setError] = useState<string | null>(null);
 	const [inputValue, setInputValue] = useState(value);
@@ -45,7 +45,7 @@ const EditTaskInput: React.FC<EditTaskInputPropsType> = ({
 				/>
 				<div className={styled.buttonsContainer}>
 					<Ok onClick={() => {}} />
-					<Cross onClick={() => cancelEditing(id)} />
+					<Cross onClick={() => editTodo(id)} />
 				</div>
 				{/* {error && <div className={styled.errorMassage}>{error}</div>} */}
 			</div>

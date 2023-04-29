@@ -15,8 +15,8 @@ type ListOfTodosPropsType = {
 	changeFilter: (value: FilterValuesType) => void;
 	changeTaskStatus: (taskId: string, isDone: boolean) => void;
 	removeTask: (id: string) => void;
-	editTodo: (id: string,  title: string) => void;
-	cancelEditing: (id: string) => void;
+	editAndCancelEditingTodo: (id: string,  title?: string) => void;
+	// cancelEditing: (id: string) => void;
 };
 
 const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
@@ -26,8 +26,8 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 	changeFilter,
 	changeTaskStatus,
 	removeTask,
-	editTodo,
-	cancelEditing
+	editAndCancelEditingTodo,
+	// cancelEditing
 }) => {
 
 	let tasksForTodoList = tasks;
@@ -52,12 +52,12 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 						};
 						return task.isEditing ? (
 							<EditTaskInput
-								tasks={tasks}
-								editTodo={editTodo}
-								key={task.id}
-								id={task.id}
-								value={task.title}
-								cancelEditing={cancelEditing}
+							tasks={tasks}
+							key={task.id}
+							id={task.id}
+							value={task.title}
+							editTodo={editAndCancelEditingTodo}
+								// cancelEditing={cancelEditing}
 							/>
 						) : (
 							<li
@@ -76,7 +76,7 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 										onChange={onChangeHandler}
 										checked={task.isDone}
 									/>
-									<EditTask editTodo={editTodo} onClick={() => editTodo(task.id, task.title)} />
+									<EditTask editTodo={editAndCancelEditingTodo} onClick={() => editAndCancelEditingTodo(task.id, task.title)} />
 									<Trash onClick={removeTaskHandler} />
 								</div>
 							</li>
