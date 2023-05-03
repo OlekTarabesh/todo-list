@@ -1,18 +1,20 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
 import styled from "./checkbox.module.css";
 
 type CheckboxPropsType = {
 	id: string;
-	onChange: any;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	checked: boolean;
+	disabled: boolean;
 };
-const Checkbox: React.FC<CheckboxPropsType> = ({ id, onChange, checked }) => {
+const Checkbox: React.FC<CheckboxPropsType> = ({ id, onChange, checked, disabled }) => {
 	return (
 		<div>
 			<input
 				id={id}
 				type="checkbox"
+				disabled={disabled}
 				onChange={onChange}
 				checked={checked}
 				className={styled.checkIsDone}

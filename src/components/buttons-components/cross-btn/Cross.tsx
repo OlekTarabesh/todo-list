@@ -1,7 +1,7 @@
+import React from "react";
+
 import Button from "../button/Button";
 import styled from "./cross.module.css";
-
-import React from "react";
 
 type CrossPropsType = {
 	onClick: () => void;

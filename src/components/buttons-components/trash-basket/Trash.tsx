@@ -1,7 +1,7 @@
+import React from "react";
+
 import Button from "../button/Button";
 import styled from "./trash.module.css";
-
-import React from "react";
 
 type TrashPropsType = {
 	onClick: () => void;

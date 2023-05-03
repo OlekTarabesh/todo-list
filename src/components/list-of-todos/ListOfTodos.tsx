@@ -1,95 +1,126 @@
-import { FilterValuesType, TaskType } from "../../global-type";
+import React, { ChangeEvent, KeyboardEvent, useState } from "react";
+
 import Checkbox from "../buttons-components/checkbox/Checkbox";
-import EditTaskInput from "../edit-task-form/EditTaskInput";
 import EditTask from "../buttons-components/edit-task/EditTask";
-import FilterButtons from "../buttons-components/filter-buttons/FilterButtons";
 import Trash from "../buttons-components/trash-basket/Trash";
+import Ok from "../buttons-components/ok-btn/Ok";
+import Cross from "../buttons-components/cross-btn/Cross";
+
 import styled from "./list-of-todos.module.css";
 
-import React, { ChangeEvent } from "react";
-
 type ListOfTodosPropsType = {
-	tasks: Array<TaskType>;
+	id: string;
+	title: string;
+	isDone: boolean;
+	checked: boolean;
 	filter: string;
-	children?: any;
-	changeFilter: (value: FilterValuesType) => void;
-	changeTaskStatus: (taskId: string, isDone: boolean) => void;
 	removeTask: (id: string) => void;
-	editAndCancelEditingTodo: (id: string,  title?: string) => void;
-	// cancelEditing: (id: string) => void;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	editTodo: (id: string, title: string) => void;
+	onChangeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
+	onKeyPressHandler: (e: KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
-	tasks,
+	title,
+	id,
+	isDone,
+	checked,
 	filter,
-	children,
-	changeFilter,
-	changeTaskStatus,
 	removeTask,
-	editAndCancelEditingTodo,
-	// cancelEditing
+	onChange,
+	editTodo,
+	onChangeHandler,
+	onKeyPressHandler,
 }) => {
+	
+	const [editTask, setEditTask] = useState(false);
+	const [value, setValue] = useState(title);
+	const [error, setError] = useState(false);
+	
+	const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+		if(e.key === 'Enter' && value) {
+			editTodo(id, value);
+			setEditTask(false);
+		} else {
+			setError(true);
+		}};
 
-	let tasksForTodoList = tasks;
-	if (filter === "completed") {
-		tasksForTodoList = tasks.filter((t) => t.isDone === true);
-	} else if (filter === "active") {
-		tasksForTodoList = tasks.filter((t) => t.isDone === false);
-	}
+	const okBtnkHandler = () => {
+		if(value === '') {
+			setError(true);
+		} else {
+			editTodo(id, value);
+			setEditTask(false);
+		};
+	};
+
+	const crossBtnkHandler = () => {
+		if(value === '' || value) {
+			setEditTask(false);
+			setValue(title);
+			setError(false);
+			} 
+		};
+	
+	const editTaskBtnHandler = () => {
+		if(isDone) {
+			return
+		} else {
+			setEditTask(true);
+		};
+	};
+
+	const trashBtnHandler = () => {
+		removeTask(id);
+	};
 
 	return (
-		<>
-			<div className={styled.wrapper}>
-				<ul className={styled.ulContainer}>
-					{tasksForTodoList.map((task) => {
-						const onChangeHandler = (
-							e: ChangeEvent<HTMLInputElement>
-						) => {
-							changeTaskStatus(task.id, e.currentTarget.checked);
-						};
-						const removeTaskHandler = () => {
-							removeTask(task.id);
-						};
-						return task.isEditing ? (
-							<EditTaskInput
-							tasks={tasks}
-							key={task.id}
-							id={task.id}
-							value={task.title}
-							editTodo={editAndCancelEditingTodo}
-								// cancelEditing={cancelEditing}
-							/>
-						) : (
-							<li
-								key={task.id}
-								className={`${
-									task.isDone
-										? styled.taskTextAndContainerIsDone
-										: styled.taskTextAndContainer
-								}`}
-							>
-								{task.title}
+			<div className={styled.container}>
+				{editTask ? (
+					<div className={`${checked ? styled.taskIsDone : styled.taskIsNotDone}`}>
 
-								<div className={styled.iconsContainer}>
-									<Checkbox
-										id={task.id}
-										onChange={onChangeHandler}
-										checked={task.isDone}
-									/>
-									<EditTask editTodo={editAndCancelEditingTodo} onClick={() => editAndCancelEditingTodo(task.id, task.title)} />
-									<Trash onClick={removeTaskHandler} />
-								</div>
-							</li>
-						);
-					})}
-					{children}
-				</ul>
+						<input 
+							value={value} 
+							onKeyDown={onKeyDownHandler}
+							placeholder={error ? 'Field is required' : ''}
+							onChange={(e) => {
+							setValue(e.target.value);
+							setError(false)
+						}} 
+							className={`${error ? styled.inputError :  styled.input}`}/>
+
+						<div className={styled.iconsContainer}>
+							<Ok 
+								onKeyDown={onKeyPressHandler}
+								onClick={okBtnkHandler}
+						/>
+							<Cross onClick={crossBtnkHandler}/>
+							</div>
+						</div>
+							) : (
+						<div className={`${checked ? styled.taskIsDone : styled.taskIsNotDone}`}>
+
+						<span className={styled.titleUpdate}>{title}</span>
+						
+						<div className={styled.iconsContainer}>
+							<Checkbox 
+								id={id} 
+								disabled={editTask}
+								onChange={onChangeHandler} 
+								checked={isDone}
+								/>	
+							<EditTask
+								onClick={editTaskBtnHandler}
+								
+								/>
+							<Trash 
+								onClick={trashBtnHandler}
+								/>
+						</div>
+					</div>						
+				)}
 			</div>
-			<FilterButtons 
-				filter={filter}
-				changeFilter={changeFilter}
-			/>
-		</>
 	);
 };
 

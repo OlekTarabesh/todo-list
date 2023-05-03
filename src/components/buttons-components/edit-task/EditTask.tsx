@@ -4,13 +4,12 @@ import styled from "./edit-task.module.css";
 import React from "react";
 
 type EditTaskPropsType = {
-	editTodo: (id: string, title: string) => void;
 	onClick: () => void;
 };
-const EditTask: React.FC<EditTaskPropsType> = ({ onClick, editTodo }) => {
+const EditTask: React.FC<EditTaskPropsType> = ({ onClick }) => {
 	return (
 		<div>
-			<Button editTodo={editTodo} onClick={onClick} className={styled.editTaskButton} />
+			<Button disabled={false}  onClick={onClick} className={styled.editTaskButton} />
 		</div>
 	);
 };

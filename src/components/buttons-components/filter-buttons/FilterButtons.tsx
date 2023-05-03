@@ -1,14 +1,16 @@
-import { FilterValuesType } from "../../../global-type";
+import { FilterValuesType, TaskType } from "../../../global-type";
 import Button from "../button/Button";
 import styled from "./button.module.css";
 
 type FilterButtonsPropsType = {
 	filter: string;
+	filteredTasks: Array<TaskType>;
 	changeFilter: (value: FilterValuesType) => void;
 };
 
 const FilterButtons: React.FC<FilterButtonsPropsType> = ({
 	filter,
+	filteredTasks,
 	changeFilter
 }) => {
 
@@ -21,10 +23,11 @@ const FilterButtons: React.FC<FilterButtonsPropsType> = ({
 	const onCompletedFilterHandler = () => {
 		changeFilter("completed");
 	};
+	
 	return (
 		<div className={styled.container}>
 			<Button
-				onClick={onAllFilterHandler}
+				onClick={ onAllFilterHandler}
 				className={`${filter === "all" ? styled.active : styled.buttons}`}
 			>
 				all

@@ -1,25 +1,28 @@
 import React from "react";
+
 import { FilterValuesType } from "../../../global-type";
 
-// import styled from "./button.module.css";
-
 type ButtonPropsType = {
+	onKeyDown?: any;
+	children?: any;
+	className: string;
+	disabled?: boolean;
 	onChange?: () => void;
 	onClick?: () => void;
 	editTodo?: (id: string, taska: string) => void;
 	changeFilter?: (value: FilterValuesType) => void;
-	children?: any;
-	className: string;
+
 };
 
 const Button: React.FC<ButtonPropsType> = ({
 	onClick,
 	onChange,
+	onKeyDown,
 	children,
 	className,
 }) => {
 	return (
-		<button onChange={onChange} className={className} onClick={onClick}>
+		<button onKeyDown={onKeyDown} disabled={false} onChange={onChange} className={className} onClick={onClick}>
 			{children}
 		</button>
 	);

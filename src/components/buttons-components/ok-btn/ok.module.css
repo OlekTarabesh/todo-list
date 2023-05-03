@@ -18,7 +18,6 @@
     background-color: transparent;
     width: 20px;
     height: 20px;
-    /* background-image: url('../../assets/ok.svg') center center/cover no-repeat; */
     background-image: url('../../../assets/ok.svg');
     cursor: pointer;
 }

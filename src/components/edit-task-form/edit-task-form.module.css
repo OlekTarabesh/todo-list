@@ -27,7 +27,6 @@
     transition: all 0.1s ease-in-out;
     cursor: pointer;
     outline: none;
-    /* text-indent: 20px; */
 }
 
 .buttonsContainer {

@@ -1,15 +1,16 @@
+import React from "react";
+
 import Button from "../button/Button";
 import styled from "./ok.module.css";
 
-import React from "react";
-
 type OkPropsType = {
-	onClick: () => void;
+	onClick: (e: any) => void;
+	onKeyDown?: any;
 };
-const Ok: React.FC<OkPropsType> = ({ onClick }) => {
+const Ok: React.FC<OkPropsType> = ({ onClick, onKeyDown }) => {
 	return (
-		<div className={styled.ok} onClick={onClick}>
-			<Button className={styled.okBtn} />
+		<div className={styled.ok} onClick={onClick} >
+			<Button onKeyDown={onKeyDown} className={styled.okBtn} />
 		</div>
 	);
 };
