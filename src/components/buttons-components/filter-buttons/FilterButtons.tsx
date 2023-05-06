@@ -30,19 +30,19 @@ const FilterButtons: React.FC<FilterButtonsPropsType> = ({
 				onClick={ onAllFilterHandler}
 				className={`${filter === "all" ? styled.active : styled.buttons}`}
 			>
-				all
+				All
 			</Button>
 			<Button
 				onClick={onActiveFilterHandler}
 				className={`${filter === "active" ? styled.active : styled.buttons}`}
 			>
-				active
+				Active
 			</Button>
 			<Button
 				onClick={onCompletedFilterHandler}
 				className={`${filter === "completed" ? styled.active : styled.buttons}`}
 			>
-				completed
+				Completed
 			</Button>
 		</div>
 	);

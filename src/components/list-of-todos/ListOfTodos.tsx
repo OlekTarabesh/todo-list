@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react";
+import React, { ChangeEvent, KeyboardEvent, useEffect, useRef, useState,  } from "react";
 
 import Checkbox from "../buttons-components/checkbox/Checkbox";
 import EditTask from "../buttons-components/edit-task/EditTask";
@@ -38,6 +38,9 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 	const [value, setValue] = useState(title);
 	const [error, setError] = useState(false);
 	
+	const editTaskInputRef = useRef<HTMLInputElement>(null);
+
+	
 	const onKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
 		if(e.key === 'Enter' && value) {
 			editTodo(id, value);
@@ -75,12 +78,21 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 		removeTask(id);
 	};
 
+
+	useEffect(() => {
+		if(editTask) {
+			editTaskInputRef?.current?.focus();
+		}
+	}, [editTask]);
+
+
 	return (
 			<div className={styled.container}>
 				{editTask ? (
 					<div className={`${checked ? styled.taskIsDone : styled.taskIsNotDone}`}>
 
 						<input 
+							ref={editTaskInputRef}
 							value={value} 
 							onKeyDown={onKeyDownHandler}
 							placeholder={error ? 'Field is required' : ''}
