@@ -18,9 +18,13 @@ const TodoApp: React.FC<TodoAppPropsType> = () => {
 	const getLocalstorage = () => {
 		let taska = window.localStorage.getItem("tasks");
 
+		console.log(taska);
 		if(taska) {
 			return (taska = JSON.parse(localStorage.getItem('tasks') || '[]'));
-		} else { return [] }
+		} else { 
+			return [] 
+		}
+		
 	}
 	
 	let [tasks, setTasks] = useState<Array<TaskType>>(getLocalstorage(),
@@ -33,20 +37,11 @@ const TodoApp: React.FC<TodoAppPropsType> = () => {
 	const [value, setValue] = useState<string>("");
 	const [error, setError] = useState<boolean | null>(null);
 
-	
-	// useEffect(() => {
-	// 	const taska = window.localStorage.getItem('tasks') || '[]';
-	// 	if (taska !== null) {
-	// 		setTasks(JSON.parse(taska));
-	// 		console.log(localStorage);	
-	// 	}
-	//   }, []);
-
-
-
 	useEffect(() => {
 		if(tasks.length !== 0) {
 			localStorage.setItem('tasks', JSON.stringify(tasks));
+		} else {
+			localStorage.setItem('tasks', JSON.stringify([]));
 		}
 		setTasks(tasks);
 	}, [tasks]);
