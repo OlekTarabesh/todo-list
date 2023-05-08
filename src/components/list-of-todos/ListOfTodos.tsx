@@ -110,7 +110,9 @@ const ListOfTodos: React.FC<ListOfTodosPropsType> = ({
 							<Cross onClick={crossBtnkHandler}/>
 							</div>
 						</div>
+
 							) : (
+								
 						<div className={`${checked ? styled.taskIsDone : styled.taskIsNotDone}`}>
 
 						<span className={styled.titleUpdate}>{title}</span>

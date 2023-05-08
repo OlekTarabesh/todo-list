@@ -1,4 +1,4 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react'
+import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react'
 
 
 import TodoInput from '../todo-Input/TodoInput'
@@ -11,18 +11,47 @@ import styled from './todo-app.module.css'
 
 type TodoAppPropsType = {};
 
+
+
 const TodoApp: React.FC<TodoAppPropsType> = () => {
+	
+	const getLocalstorage = () => {
+		let taska = window.localStorage.getItem("tasks");
 
-    const [tasks, setTasks] = useState<Array<TaskType>>([
-		{ id: v1(), title: "HTML", isDone: false, isEditing: false },
-		{ id: v1(), title: "CSS", isDone: false, isEditing: false },
-		{ id: v1(), title: "JS", isDone: false, isEditing: false },
-		{ id: v1(), title: "Redux", isDone: true, isEditing: false },
-	]);
-
+		if(taska) {
+			return (taska = JSON.parse(localStorage.getItem('tasks') || '[]'));
+		} else { return [] }
+	}
+	
+	let [tasks, setTasks] = useState<Array<TaskType>>(getLocalstorage(),
+	//  [ { id: v1(), title: 'HTML', isDone: false, isEditing: false, } ]
+	//  [ { id: v1(), title: 'CSS', isDone: false, isEditing: false, } ]
+	//  [ { id: v1(), title: 'Javascript', isDone: false, isEditing: false, } ]
+	//  [ { id: v1(), title: 'Redux', isDone: false, isEditing: false, } ]
+	);
 	const [filter, setFilter] = useState("all");
 	const [value, setValue] = useState<string>("");
 	const [error, setError] = useState<boolean | null>(null);
+
+	
+	// useEffect(() => {
+	// 	const taska = window.localStorage.getItem('tasks') || '[]';
+	// 	if (taska !== null) {
+	// 		setTasks(JSON.parse(taska));
+	// 		console.log(localStorage);	
+	// 	}
+	//   }, []);
+
+
+
+	useEffect(() => {
+		if(tasks.length !== 0) {
+			localStorage.setItem('tasks', JSON.stringify(tasks));
+		}
+		setTasks(tasks);
+	}, [tasks]);
+
+	
 
 
 	const handelInput = (text: string) => {
